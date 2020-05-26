@@ -1,10 +1,12 @@
-import unittest
 from selenium import webdriver
-class MainTests(unittest.TestCase):
-   def test_demo_login(self):
-       driver = webdriver.Chrome(executable_path=r"C:\TestFiles\chromedriver.exe")
-       driver.get('https://demobank.jaktestowac.pl/logowanie_etap_1.html')
-       title = driver.title
-       print(title)
-       assert 'Demobank - Bankowość Internetowa - Logowanie' == title
-       driver.quit()
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+def test_log_in():
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver.maximize_window()
+    driver.get('http://seleniumdemo.com/')
+    driver.find_element(By.ID, 'menu-item-22').click()
+    driver.find_element(By.ID, 'username').send_keys('slonko@pm.me')
+    driver.find_element(By.ID, 'password').send_keys('testeroprogramowania')
+    driver.find_element(By.ID, 'password').send_keys(Keys.ENTER)
